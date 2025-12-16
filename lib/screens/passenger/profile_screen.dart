@@ -49,9 +49,16 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  const Text(
-                    '⭐ 4.9 • Passenger',
-                    style: TextStyle(fontSize: 14, color: Colors.white70),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.star_rounded, size: 16, color: Colors.white70),
+                      SizedBox(width: 6),
+                      Text(
+                        '4.9 • Passenger',
+                        style: TextStyle(fontSize: 14, color: Colors.white70),
+                      ),
+                    ],
                   ),
                 ],
               ),

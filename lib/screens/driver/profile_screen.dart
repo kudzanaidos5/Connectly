@@ -59,9 +59,16 @@ class DriverProfileScreen extends StatelessWidget {
                       color: Colors.white.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Text(
-                      '⭐ 4.8 • Verified Driver',
-                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.star_rounded, size: 14, color: Colors.white),
+                        SizedBox(width: 6),
+                        Text(
+                          '4.8 • Verified Driver',
+                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -68,8 +68,8 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
       body: Column(
         children: [
           GradientHeader(
-            title: '🚗 Connectly',
-            subtitle: 'Find Your Ride, Share The Cost',
+            title: 'Connectly',
+            subtitle: 'Find your ride. Share the cost.',
             isDriver: false,
           ),
           Expanded(

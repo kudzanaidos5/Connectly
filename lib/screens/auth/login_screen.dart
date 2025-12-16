@@ -67,7 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('🚗', style: TextStyle(fontSize: 64)),
+                    const Icon(
+                      Icons.directions_car_rounded,
+                      size: 64,
+                      color: Colors.white,
+                    ),
                     const SizedBox(height: 16),
                     const Text(
                       'Connectly',
@@ -79,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Find Your Ride, Share The Cost',
+                      'Find your ride. Share the cost.',
                       style: TextStyle(fontSize: 16, color: Colors.white70),
                     ),
                     const SizedBox(height: 48),

@@ -86,7 +86,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  '🚗 Driver Mode',
+                  'Driver',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
@@ -158,20 +158,21 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
   Widget _buildQuickStats() {
     return Container(
       padding: const EdgeInsets.all(20),
-      color: AppColors.background,
       child: Row(
         children: [
-          Expanded(child: _buildStatBox('🎫', '12', 'Trips Today')),
+          Expanded(
+            child: _buildStatBox(Icons.confirmation_number, '12', 'Trips'),
+          ),
           const SizedBox(width: 10),
-          Expanded(child: _buildStatBox('⭐', '4.8', 'Rating')),
+          Expanded(child: _buildStatBox(Icons.star_rounded, '4.8', 'Rating')),
           const SizedBox(width: 10),
-          Expanded(child: _buildStatBox('👥', '3', 'Requests')),
+          Expanded(child: _buildStatBox(Icons.group_rounded, '3', 'Requests')),
         ],
       ),
     );
   }
 
-  Widget _buildStatBox(String icon, String value, String label) {
+  Widget _buildStatBox(IconData icon, String value, String label) {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -187,7 +188,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       ),
       child: Column(
         children: [
-          Text(icon, style: const TextStyle(fontSize: 24)),
+          Icon(icon, size: 22, color: AppColors.driverPrimaryEnd),
           const SizedBox(height: 5),
           Text(
             value,
@@ -208,38 +209,15 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       padding: const EdgeInsets.all(20),
       child: SizedBox(
         width: double.infinity,
-        child: ElevatedButton(
+        child: FilledButton.icon(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const CreateTripScreen()),
             );
           },
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          child: Container(
-            decoration: BoxDecoration(gradient: AppColors.driverGradient),
-            padding: const EdgeInsets.symmetric(vertical: 18),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('➕', style: TextStyle(fontSize: 24)),
-                SizedBox(width: 10),
-                Text(
-                  'Create New Trip',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          icon: const Icon(Icons.add),
+          label: const Text('Create new trip'),
         ),
       ),
     );
