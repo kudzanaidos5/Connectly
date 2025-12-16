@@ -13,6 +13,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 3,
+        onTap: onNavTap,
+        isDriver: false,
+      ),
       body: Column(
         children: [
           Container(
@@ -24,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: Colors.white.withValues(alpha: 0.3),
                     child: const Text(
                       'SK',
                       style: TextStyle(
@@ -59,7 +64,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          BottomNavBar(currentIndex: 3, onTap: onNavTap, isDriver: false),
         ],
       ),
     );
@@ -137,13 +141,13 @@ class ProfileScreen extends StatelessWidget {
       builder: (context, authProvider, _) {
         return Card(
           margin: const EdgeInsets.only(bottom: 10),
-          color: AppColors.passengerPrimaryStart.withOpacity(0.1),
+          color: AppColors.passengerPrimaryStart.withValues(alpha: 0.1),
           child: ListTile(
             leading: Container(
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.driverPrimaryEnd.withOpacity(0.2),
+                color: AppColors.driverPrimaryEnd.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Icon(

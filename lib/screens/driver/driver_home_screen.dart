@@ -5,6 +5,7 @@ import 'create_trip_screen.dart';
 import 'my_trips_screen.dart';
 import 'earnings_screen.dart';
 import 'profile_screen.dart';
+import '../passenger/messages_screen.dart';
 
 class DriverHomeScreen extends StatefulWidget {
   const DriverHomeScreen({super.key});
@@ -23,6 +24,12 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
     }
 
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(() => _currentIndex = index),
+        isDriver: true,
+        messageBadgeCount: 3,
+      ),
       body: Column(
         children: [
           _buildHeader(),
@@ -37,12 +44,6 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
               ),
             ),
           ),
-          BottomNavBar(
-            currentIndex: _currentIndex,
-            onTap: (index) => setState(() => _currentIndex = index),
-            isDriver: true,
-            messageBadgeCount: 3,
-          ),
         ],
       ),
     );
@@ -53,6 +54,11 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
       case 1:
         return MyTripsScreen(
           onNavTap: (index) => setState(() => _currentIndex = index),
+        );
+      case 2:
+        return MessagesScreen(
+          onNavTap: (index) => setState(() => _currentIndex = index),
+          isDriver: true,
         );
       case 3:
         return EarningsScreen(
@@ -93,7 +99,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.3),
+                    color: Colors.white.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Text(
@@ -111,7 +117,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
             Container(
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -173,7 +179,7 @@ class _DriverHomeScreenState extends State<DriverHomeScreen> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 5,
             offset: const Offset(0, 2),
           ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../widgets/gradient_header.dart';
-import '../../utils/app_colors.dart';
 
 class CreateTripScreen extends StatefulWidget {
   const CreateTripScreen({super.key});
@@ -165,7 +164,7 @@ class _CreateTripScreenState extends State<CreateTripScreen> {
                         children: [
                           Expanded(
                             child: DropdownButtonFormField<int>(
-                              value: _availableSeats,
+                              initialValue: _availableSeats,
                               decoration: const InputDecoration(
                                 labelText: 'Available Seats',
                               ),
@@ -206,7 +205,7 @@ class _CreateTripScreenState extends State<CreateTripScreen> {
                       ),
                       const SizedBox(height: 15),
                       DropdownButtonFormField<String>(
-                        value: _vehicleType,
+                        initialValue: _vehicleType,
                         decoration: const InputDecoration(
                           labelText: 'Vehicle Type',
                         ),
@@ -240,50 +239,14 @@ class _CreateTripScreenState extends State<CreateTripScreen> {
                         maxLines: 3,
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
+                      FilledButton(
                         onPressed: _submitTrip,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: AppColors.driverGradient,
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: const Text(
-                            'Publish Trip',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
+                        child: const Text('Publish trip'),
                       ),
                       const SizedBox(height: 10),
                       OutlinedButton(
                         onPressed: () => Navigator.pop(context),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          side: const BorderSide(
-                            color: AppColors.driverPrimaryEnd,
-                            width: 2,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: const Text(
-                          'Cancel',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.driverPrimaryEnd,
-                          ),
-                        ),
+                        child: const Text('Cancel'),
                       ),
                     ],
                   ),

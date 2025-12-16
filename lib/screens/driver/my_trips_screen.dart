@@ -11,6 +11,12 @@ class MyTripsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 1,
+        onTap: onNavTap,
+        isDriver: true,
+        messageBadgeCount: 3,
+      ),
       body: Column(
         children: [
           GradientHeader(
@@ -29,12 +35,6 @@ class MyTripsScreen extends StatelessWidget {
                 Expanded(child: _buildEmptyState()),
               ],
             ),
-          ),
-          BottomNavBar(
-            currentIndex: 1,
-            onTap: onNavTap,
-            isDriver: true,
-            messageBadgeCount: 3,
           ),
         ],
       ),
@@ -68,7 +68,7 @@ class MyTripsScreen extends StatelessWidget {
         boxShadow: isActive
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 5,
                   offset: const Offset(0, 2),
                 ),

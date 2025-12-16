@@ -11,6 +11,12 @@ class EarningsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 3,
+        onTap: onNavTap,
+        isDriver: true,
+        messageBadgeCount: 3,
+      ),
       body: Column(
         children: [
           GradientHeader(
@@ -25,106 +31,95 @@ class EarningsScreen extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               child: Column(
-                children: [_buildEarningsSummary(), _buildTransactions()],
+                children: [
+                  _buildEarningsSummary(context),
+                  _buildTransactions(),
+                ],
               ),
             ),
-          ),
-          BottomNavBar(
-            currentIndex: 3,
-            onTap: onNavTap,
-            isDriver: true,
-            messageBadgeCount: 3,
           ),
         ],
       ),
     );
   }
 
-  Widget _buildEarningsSummary() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Total Available Balance',
-            style: TextStyle(fontSize: 14, color: AppColors.textMedium),
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            '\$960.00',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.w700,
-              color: AppColors.driverPrimaryEnd,
-            ),
-          ),
-          const SizedBox(height: 15),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                // TODO: Handle payout
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.success,
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                '💳 Request Payout',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+  Widget _buildEarningsSummary(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Total Available Balance',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
-          ),
-          const Divider(height: 30),
-          Row(
-            children: [
-              Expanded(child: _buildDetailItem('This Week', '\$240.00')),
-              Expanded(child: _buildDetailItem('This Month', '\$960.00')),
-            ],
-          ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              Expanded(child: _buildDetailItem('Total Trips', '67')),
-              Expanded(child: _buildDetailItem('Avg/Trip', '\$14.33')),
-            ],
-          ),
-        ],
+            const SizedBox(height: 10),
+            Text(
+              '\$960.00',
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: () {
+                  // TODO: Handle payout
+                },
+                icon: const Icon(Icons.payments_outlined),
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppColors.success,
+                ),
+                label: const Text('Request payout'),
+              ),
+            ),
+            const Divider(height: 30),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildDetailItem(context, 'This Week', '\$240.00'),
+                ),
+                Expanded(
+                  child: _buildDetailItem(context, 'This Month', '\$960.00'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                Expanded(child: _buildDetailItem(context, 'Total Trips', '67')),
+                Expanded(
+                  child: _buildDetailItem(context, 'Avg/Trip', '\$14.33'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildDetailItem(String label, String value) {
+  Widget _buildDetailItem(BuildContext context, String label, String value) {
     return Column(
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 11, color: AppColors.textMedium),
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
         const SizedBox(height: 5),
         Text(
           value,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
         ),
       ],
     );

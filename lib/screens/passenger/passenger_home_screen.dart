@@ -60,6 +60,11 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
     }
 
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(() => _currentIndex = index),
+        isDriver: false,
+      ),
       body: Column(
         children: [
           GradientHeader(
@@ -73,11 +78,6 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
                 children: [_buildSearchSection(), _buildTripsList()],
               ),
             ),
-          ),
-          BottomNavBar(
-            currentIndex: _currentIndex,
-            onTap: (index) => setState(() => _currentIndex = index),
-            isDriver: false,
           ),
         ],
       ),
@@ -105,8 +105,7 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
 
   Widget _buildSearchSection() {
     return Container(
-      padding: const EdgeInsets.all(20),
-      color: AppColors.background,
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Card(
@@ -151,7 +150,7 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: DropdownButtonFormField<int>(
-                          value: _passengerCount,
+                          initialValue: _passengerCount,
                           decoration: const InputDecoration(
                             labelText: 'Passengers',
                             prefixIcon: Icon(Icons.people),
@@ -179,28 +178,10 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
           const SizedBox(height: 15),
           SizedBox(
             width: double.infinity,
-            child: ElevatedButton(
+            child: FilledButton.icon(
               onPressed: _searchTrips,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: AppColors.passengerGradient,
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                child: const Text(
-                  '🔍 Search Available Rides',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              icon: const Icon(Icons.search),
+              label: const Text('Search available rides'),
             ),
           ),
         ],

@@ -19,6 +19,8 @@ class GradientHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       decoration: BoxDecoration(gradient: AppColors.getGradient(isDriver)),
       padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
@@ -36,21 +38,19 @@ class GradientHeader extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                        style: (textTheme.headlineSmall ?? const TextStyle())
+                            .copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                       ),
                       if (subtitle != null)
                         Padding(
                           padding: const EdgeInsets.only(top: 5),
                           child: Text(
                             subtitle!,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
+                            style: (textTheme.bodyMedium ?? const TextStyle())
+                                .copyWith(color: Colors.white70),
                           ),
                         ),
                     ],

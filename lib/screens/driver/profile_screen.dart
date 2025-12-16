@@ -13,6 +13,12 @@ class DriverProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavBar(
+        currentIndex: 4,
+        onTap: onNavTap,
+        isDriver: true,
+        messageBadgeCount: 3,
+      ),
       body: Column(
         children: [
           Container(
@@ -24,7 +30,7 @@ class DriverProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: Colors.white.withValues(alpha: 0.3),
                     child: const Text(
                       'TM',
                       style: TextStyle(
@@ -50,7 +56,7 @@ class DriverProfileScreen extends StatelessWidget {
                       vertical: 5,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.3),
+                      color: Colors.white.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Text(
@@ -68,12 +74,6 @@ class DriverProfileScreen extends StatelessWidget {
                 children: [_buildStats(), _buildMenuItems(context)],
               ),
             ),
-          ),
-          BottomNavBar(
-            currentIndex: 4,
-            onTap: onNavTap,
-            isDriver: true,
-            messageBadgeCount: 3,
           ),
         ],
       ),
@@ -158,13 +158,13 @@ class DriverProfileScreen extends StatelessWidget {
       builder: (context, authProvider, _) {
         return Card(
           margin: const EdgeInsets.only(bottom: 10),
-          color: AppColors.driverPrimaryEnd.withOpacity(0.1),
+          color: AppColors.driverPrimaryEnd.withValues(alpha: 0.1),
           child: ListTile(
             leading: Container(
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.passengerPrimaryEnd.withOpacity(0.2),
+                color: AppColors.passengerPrimaryEnd.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Icon(

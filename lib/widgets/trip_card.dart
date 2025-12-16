@@ -16,8 +16,11 @@ class TripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
@@ -25,21 +28,16 @@ class TripCard extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border: Border(
-              left: BorderSide(
-                color: AppColors.getPrimaryColor(isDriver),
-                width: 4,
-              ),
-            ),
+            border: Border(left: BorderSide(color: scheme.primary, width: 4)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (isDriver) _buildStatusBadge(),
               const SizedBox(height: 10),
-              _buildRoute(),
+              _buildRoute(context),
               const SizedBox(height: 12),
-              _buildTripInfo(),
+              _buildTripInfo(context),
             ],
           ),
         ),
@@ -87,17 +85,17 @@ class TripCard extends StatelessWidget {
     );
   }
 
-  Widget _buildRoute() {
+  Widget _buildRoute(BuildContext context) {
     return Column(
       children: [
-        _buildRouteItem(trip.origin, true),
+        _buildRouteItem(context, trip.origin, true),
         const SizedBox(height: 8),
-        _buildRouteItem(trip.destination, false),
+        _buildRouteItem(context, trip.destination, false),
       ],
     );
   }
 
-  Widget _buildRouteItem(String location, bool isStart) {
+  Widget _buildRouteItem(BuildContext context, String location, bool isStart) {
     return Row(
       children: [
         Container(
@@ -112,23 +110,30 @@ class TripCard extends StatelessWidget {
         Expanded(
           child: Text(
             location,
-            style: const TextStyle(fontSize: 14, color: AppColors.textDark),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildTripInfo() {
+  Widget _buildTripInfo(BuildContext context) {
     if (isDriver) {
       return Row(
         children: [
           Expanded(
-            child: _buildInfoBox('Departure', _formatTime(trip.departureTime)),
+            child: _buildInfoBox(
+              context,
+              'Departure',
+              _formatTime(trip.departureTime),
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(
             child: _buildInfoBox(
+              context,
               'Base Fare',
               '\$${trip.totalFare.toStringAsFixed(2)}',
             ),
@@ -136,6 +141,7 @@ class TripCard extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: _buildInfoBox(
+              context,
               'Seats',
               '${trip.totalSeats - trip.availableSeats}/${trip.totalSeats}',
             ),
@@ -143,6 +149,7 @@ class TripCard extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: _buildInfoBox(
+              context,
               'Earnings',
               '\$${trip.driverEarnings.toStringAsFixed(2)}',
             ),
@@ -152,51 +159,67 @@ class TripCard extends StatelessWidget {
     } else {
       return Row(
         children: [
-          _buildInfoItem(Icons.access_time, _formatTime(trip.departureTime)),
+          _buildInfoItem(
+            context,
+            Icons.access_time,
+            _formatTime(trip.departureTime),
+          ),
           const SizedBox(width: 15),
-          _buildInfoItem(Icons.event_seat, '${trip.availableSeats} seats left'),
+          _buildInfoItem(
+            context,
+            Icons.event_seat,
+            '${trip.availableSeats} seats left',
+          ),
           const SizedBox(width: 15),
-          _buildInfoItem(Icons.directions_car, trip.vehicleInfo.displayName),
+          _buildInfoItem(
+            context,
+            Icons.directions_car,
+            trip.vehicleInfo.displayName,
+          ),
         ],
       );
     }
   }
 
-  Widget _buildInfoBox(String label, String value) {
+  Widget _buildInfoBox(BuildContext context, String label, String value) {
+    final scheme = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: AppColors.background,
+        color: scheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 11, color: AppColors.textMedium),
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(color: scheme.onSurfaceVariant),
           ),
           const SizedBox(height: 3),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.textDark,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoItem(IconData icon, String text) {
+  Widget _buildInfoItem(BuildContext context, IconData icon, String text) {
+    final scheme = Theme.of(context).colorScheme;
     return Row(
       children: [
-        Icon(icon, size: 16, color: AppColors.textMedium),
+        Icon(icon, size: 16, color: scheme.onSurfaceVariant),
         const SizedBox(width: 5),
         Text(
           text,
-          style: const TextStyle(fontSize: 13, color: AppColors.textMedium),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
         ),
       ],
     );
